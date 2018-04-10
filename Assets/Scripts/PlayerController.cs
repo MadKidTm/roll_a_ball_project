@@ -7,8 +7,10 @@ public class PlayerController : MonoBehaviour
 {
 
     public float speed;
+    public float jumpSpeed;
     public Text Score;
     public Text winText;
+    public bool isGrounded;
 
     private Rigidbody rb;
     private int count;
@@ -22,6 +24,16 @@ public class PlayerController : MonoBehaviour
         winText.text = "";
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            isGrounded = false;
+            Vector3 jump = new Vector3(0.0f, 2.0f, 0f);
+            rb.AddForce(jump * jumpSpeed, ForceMode.Impulse);
+        }
+    }
+
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -31,6 +43,13 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(movement * speed);
 
+        
+
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        isGrounded = true;
     }
 
     void OnTriggerEnter(Collider other)
@@ -52,4 +71,6 @@ public class PlayerController : MonoBehaviour
             winText.text = "Congratulations dude !";
         }
     }
+
+    
 }

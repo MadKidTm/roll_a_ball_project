@@ -648,8 +648,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  jumpSpeed: 5
   Score: {fileID: 40510719}
   winText: {fileID: 760354481}
+  isGrounded: 0
 --- !u!54 &551054776
 Rigidbody:
   m_ObjectHideFlags: 0
